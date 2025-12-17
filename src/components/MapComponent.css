@@ -1,0 +1,262 @@
+/* src/components/MapComponent.css */
+.map-wrapper {
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    margin: 20px 0;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  .map-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+  
+  .map-header h2 {
+    color: #1a2980;
+    margin: 0;
+  }
+  
+  .map-legend {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+  }
+  
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+  }
+  
+  .legend-color {
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+  }
+  
+  .legend-color.flood { background-color: #1e90ff; }
+  .legend-color.landslide { background-color: #8b4513; }
+  .legend-color.storm { background-color: #483d8b; }
+  .legend-color.low-risk { background-color: #2ed573; }
+  
+  .map-container {
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 20px;
+  }
+  
+  /* Leaflet Map Customization */
+  .leaflet-container {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  }
+  
+  .leaflet-popup-content {
+    min-width: 200px;
+  }
+  
+  .map-popup, .zone-popup, .area-popup {
+    padding: 5px;
+  }
+  
+  .map-popup h3 {
+    color: #1a2980;
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+  }
+  
+  .map-popup p {
+    margin: 5px 0;
+    font-size: 0.9rem;
+  }
+  
+  .map-popup ul {
+    margin: 5px 0;
+    padding-left: 20px;
+    font-size: 0.9rem;
+  }
+  
+  .map-popup li {
+    margin: 2px 0;
+  }
+  
+  .popup-severity {
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    margin-left: 5px;
+    color: white;
+  }
+  
+  .popup-severity.high { background: #ff4757; }
+  .popup-severity.medium { background: #ffa502; }
+  .popup-severity.low { background: #2ed573; }
+  
+  .popup-button {
+    background: #1a2980;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 10px;
+    font-size: 0.9rem;
+    transition: background 0.3s;
+  }
+  
+  .popup-button:hover {
+    background: #26d0ce;
+  }
+  
+  .map-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+  }
+  
+  .map-stats {
+    display: flex;
+    gap: 25px;
+  }
+  
+  .stat {
+    text-align: center;
+  }
+  
+  .stat-number {
+    display: block;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #1a2980;
+  }
+  
+  .stat-label {
+    display: block;
+    font-size: 0.9rem;
+    color: #666;
+    margin-top: 5px;
+  }
+  
+  .map-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  
+  .control-button {
+    background: #f8f9fa;
+    color: #1a2980;
+    border: 2px solid #1a2980;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  
+  .control-button:hover {
+    background: #1a2980;
+    color: white;
+  }
+  
+  .map-footer {
+    margin-top: 20px;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    color: #666;
+  }
+  
+  .map-footer p {
+    margin: 5px 0;
+  }
+
+  /* Add to src/components/MapComponent.css */
+.weather-info-popup {
+    background: #e3f2fd;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+  }
+  
+  .live-badge {
+    background: #2ed573;
+    color: white;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 0.7rem;
+    margin-left: 5px;
+    animation: pulse 2s infinite;
+  }
+  
+  @keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.7; }
+    100% { opacity: 1; }
+  }
+  
+  .data-source {
+    margin-top: 5px;
+    font-style: italic;
+    color: #666;
+  }
+  
+  /* Mobile Responsive */
+  @media (max-width: 768px) {
+    .map-header {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    
+    .map-container {
+      height: 400px;
+    }
+    
+    .map-controls {
+      flex-direction: column;
+      align-items: stretch;
+    }
+    
+    .map-stats {
+      justify-content: space-around;
+    }
+    
+    .map-actions {
+      justify-content: center;
+    }
+    
+    .control-button {
+      flex: 1;
+      justify-content: center;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .map-stats {
+      flex-direction: column;
+      gap: 15px;
+    }
+    
+    .map-legend {
+      flex-direction: column;
+      gap: 8px;
+    }
+  }
