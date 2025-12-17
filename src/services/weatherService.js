@@ -4,34 +4,24 @@ const BASE_URL = 'https://api.openweathermap.org/data/2.5';
 const cache = {};
 
 const getAlertTypeFromWeather = (weatherId) => {
-  // Thunderstorm
   if (weatherId >= 200 && weatherId < 300) return 'storm';
-  // Drizzle
   if (weatherId >= 300 && weatherId < 400) return 'rain';
-  // Rain
   if (weatherId >= 500 && weatherId < 600) return 'flood';
-  // Snow
   if (weatherId >= 600 && weatherId < 700) return 'snow';
-  // Atmosphere (fog, haze, etc)
   if (weatherId >= 700 && weatherId < 800) return 'fog';
-  // Clear
   if (weatherId === 800) return 'clear';
-  // Clouds
   if (weatherId > 800) return 'clouds';
   
   return 'weather';
 };
 
-// Get severity based on conditions
 const getSeverity = (weatherData) => {
   const { main, wind } = weatherData;
   
-  // Heavy rain = high risk
   if (main.humidity > 90 && weatherData.weather[0].main === 'Rain') {
     return 'high';
   }
   
-  // High winds = medium risk
   if (wind.speed > 8) {
     return 'medium';
   }
@@ -39,19 +29,15 @@ const getSeverity = (weatherData) => {
   return 'low';
 };
 
-// Main function to get weather data
 export const getWeatherByCity = async (cityName = 'Colombo') => {
   try {
-    // Check cache (lasts 10 minutes)
     const cacheKey = cityName.toLowerCase();
     const now = Date.now();
     
     if (cache[cacheKey] && (now - cache[cacheKey].timestamp < 10 * 60 * 1000)) {
-      console.log('Using cached weather data');
       return cache[cacheKey].data;
     }
     
-    // Make API call
     const response = await fetch(
       `${BASE_URL}/weather?q=${cityName}&appid=${API_KEY}&units=metric`
     );
@@ -62,7 +48,6 @@ export const getWeatherByCity = async (cityName = 'Colombo') => {
     
     const data = await response.json();
     
-    // Format for our app
     const formattedData = {
       city: data.name,
       country: data.sys.country,
@@ -88,7 +73,6 @@ export const getWeatherByCity = async (cityName = 'Colombo') => {
       })
     };
     
-    // Save to cache
     cache[cacheKey] = {
       data: formattedData,
       timestamp: now
@@ -99,12 +83,10 @@ export const getWeatherByCity = async (cityName = 'Colombo') => {
   } catch (error) {
     console.error('Error fetching weather:', error);
     
-    // Return mock data if API fails
     return getMockWeatherData(cityName);
   }
 };
 
-// Mock data for development or if API fails
 export const getMockWeatherData = (cityName = 'Colombo') => {
   const mockData = {
     colombo: {
@@ -160,13 +142,11 @@ export const getMockWeatherData = (cityName = 'Colombo') => {
   return mockData[cityName.toLowerCase()] || mockData.colombo;
 };
 
-// Get weather icon URL
 export const getWeatherIcon = (iconCode) => {
   return `https://openweathermap.org/img/wn/${iconCode}@2x.png`;
 };
 
-// Get multiple cities weather (for dashboard)
-export const getMultipleCitiesWeather = async (cities = ['Colombo', 'Kandy', 'Galle', 'Jaffna']) => {
+export const getMultipleCitiesWeather = async (cities = ['Colombo', 'Kandy', 'Galle', 'Jaffna','Batticaloa','Ampara','Trincomalee','Badulla']) => {
   try {
     const promises = cities.map(city => getWeatherByCity(city));
     const results = await Promise.all(promises);

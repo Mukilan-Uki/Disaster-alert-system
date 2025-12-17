@@ -4,17 +4,16 @@
   --background-color: white;
 }
 
-/* FIXED NAVIGATION WRAPPER */
 .nav-container-wrapper {
-  position: fixed;  /* ✅ Changed from flex to fixed */
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  z-index: 1000;  /* ✅ Ensure it's above other content */
+  z-index: 1000;
   display: flex;
   justify-content: center;
-  padding: 15px 0;  /* ✅ Add padding for better spacing */
-  background: transparent;  /* ✅ Make wrapper transparent */
+  padding: 15px 0;
+  background: transparent;
 }
 
 .navbar {
@@ -23,11 +22,11 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   border-radius: 50px;
   width: 1200px;
-  max-width: 95%;  /* ✅ Responsive max width */
+  max-width: 95%;
 }
 
 .glass-nav {
-  background: rgba(255, 255, 255, 0.428);  /* ✅ Increased opacity */
+  background: rgba(255, 255, 255, 0.428);
   border-radius: 20px;
   backdrop-filter: blur(15px);
   padding: 15px 25px;
@@ -35,7 +34,6 @@
   border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-/* FLEX CONTAINER FOR NAV ITEMS */
 .nav-container {
   display: flex;
   align-items: center;
@@ -79,7 +77,7 @@
 
 .nav-link:hover {
   transform: scale(1.1);
-  background: rgba(0, 0, 0, 0.05);  /* ✅ Add hover background */
+  background: rgba(0, 0, 0, 0.05);
 }
 
 .emergency-badge {
@@ -108,10 +106,9 @@
   100% { opacity: 1; }
 }
 
-/* MOBILE RESPONSIVE */
 @media (max-width: 768px) {
   .nav-container-wrapper {
-    padding: 10px;  /* ✅ Reduced padding on mobile */
+    padding: 10px;
   }
   
   .navbar {
@@ -141,7 +138,6 @@
   }
 }
 
-/* VERY SMALL SCREENS */
 @media (max-width: 480px) {
   .nav-links {
     flex-direction: column;

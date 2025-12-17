@@ -117,7 +117,6 @@ function MapComponent({ selectedCity = null, weatherData = [] }) {
     { center: [6.68, 80.4], radius: 4500, type: "flood" }, // Ratnapura
   ];
 
-  // Find selected city coordinates
   const selectedCityData = selectedCity
     ? sriLankanCities.find(
         (city) => city.name.toLowerCase() === selectedCity.toLowerCase()
@@ -127,7 +126,7 @@ function MapComponent({ selectedCity = null, weatherData = [] }) {
   return (
     <div className="map-wrapper">
       <div className="map-header">
-        <h2>🗺️ Sri Lanka Disaster Risk Map</h2>
+        <h2><i className="fas fa-map"></i> Sri Lanka Disaster Risk Map</h2>
         <div className="map-legend">
           <div className="legend-item">
             <div className="legend-color flood"></div>
@@ -174,14 +173,14 @@ function MapComponent({ selectedCity = null, weatherData = [] }) {
                   {city.temperature && (
                     <div className="weather-info-popup">
                       <p>
-                        <strong>🌡️ Temperature:</strong> {city.temperature}°C
+                        <strong><i className="fas fa-thermometer-half text-danger"></i> Temperature:</strong> {city.temperature}°C
                       </p>
                       <p>
                         <strong>💧 Humidity:</strong> {city.humidity}%
                       </p>
                       {city.weatherDescription && (
                         <p>
-                          <strong>🌤️ Conditions:</strong>
+                          <strong><i className="fas fa-sun text-warning"></i> Conditions:</strong>
                           {city.weatherDescription}
                         </p>
                       )}
@@ -227,20 +226,20 @@ function MapComponent({ selectedCity = null, weatherData = [] }) {
             className="control-button"
             onClick={() => (window.location.href = "/location/colombo")}
           >
-            📍 View Colombo Details
+            <i className="fas fa-location-dot text-danger"></i> View Colombo Details
           </button>
-          <button className="control-button">📥 Download Risk Map</button>
-          <button className="control-button">🖨️ Print Map</button>
+          <button className="control-button"><i className="fas fa-download"></i> Download Risk Map</button>
+          <button className="control-button"><i className="fas fa-print"></i> Print Map</button>
         </div>
       </div>
 
       <div className="map-footer">
         <p>
-          <strong>⚠️ Map Legend:</strong> Markers show disaster risk levels.
+          <strong><i className="fas fa-exclamation-triangle text-warning"></i> Map Legend:</strong> Markers show disaster risk levels.
           Click any marker for details. Blue areas indicate flood-prone regions.
         </p>
         <p>
-          <strong>📌 Note:</strong> This map shows simulated risk data for
+          <strong><i className="fas fa-thumbtack text-danger"></i> Note:</strong> This map shows simulated risk data for
           demonstration purposes. For official alerts, contact Disaster
           Management Center (1990).
         </p>
