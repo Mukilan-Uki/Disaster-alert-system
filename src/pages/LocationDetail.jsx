@@ -78,7 +78,7 @@ function LocationDetail() {
     <div className="location-detail-container">
       <div className="location-header">
         <div>
-          <h1>
+          <h1 className=' text-light'>
             <i className='fa-solid fa-location-dot'></i> {data.name} - Disaster Preparedness
             {weather && (
               <span className="weather-badge">
@@ -87,7 +87,7 @@ function LocationDetail() {
               </span>
             )}
           </h1>
-          <p className="location-subtitle">
+          <p className="location-subtitle text-light">
             Last updated: {weather?.timestamp || 'Just now'}
           </p>
         </div>
@@ -105,7 +105,7 @@ function LocationDetail() {
       
       {weather && (
         <div className="weather-stats-detail">
-          <h2><span className="fas fa-sun"></span>  Current Weather Conditions</h2>
+          <h2><span className="fas fa-sun text-warning"></span>  Current Weather Conditions</h2>
           <div className="weather-metrics">
             <div className="metric">
               <div className="metric-label">Temperature</div>

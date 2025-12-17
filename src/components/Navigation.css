@@ -21,7 +21,7 @@
   padding: 15px 20px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   border-radius: 50px;
-  width: 1200px;
+  width: 1300px;
   max-width: 95%;
 }
 
@@ -140,13 +140,17 @@
 
 @media (max-width: 480px) {
   .nav-links {
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     gap: 10px;
   }
   
   .logo-text {
-    font-size: 1.2rem;
+    font-size: 20px;
+  }
+
+  .logo{
+    font-size: 20px;
   }
   
   .nav-link span {
