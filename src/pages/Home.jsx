@@ -27,7 +27,7 @@ function Home() {
     const interval = setInterval(fetchWeather, 5 * 60 * 1000);
     
     return () => clearInterval(interval);
-  }, []);
+  }, [fetchWeather]);
 
   const handleSearch = (e) => {
     e.preventDefault();

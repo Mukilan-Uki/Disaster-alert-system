@@ -84,39 +84,6 @@ function MapComponent({ selectedCity = null, weatherData = [] }) {
     });
   };
 
-  const floodProneAreas = [
-    {
-      name: "Colombo Flood Zone",
-      coordinates: [
-        [6.95, 79.84],
-        [6.93, 79.86],
-        [6.91, 79.88],
-        [6.89, 79.85],
-        [6.92, 79.82],
-        [6.95, 79.84],
-      ],
-      color: "#1e90ff",
-    },
-    {
-      name: "Kalutara Coastal Area",
-      coordinates: [
-        [6.58, 79.95],
-        [6.56, 79.98],
-        [6.54, 80.01],
-        [6.52, 80.0],
-        [6.55, 79.96],
-        [6.58, 79.95],
-      ],
-      color: "#1e90ff",
-    },
-  ];
-
-  const highRiskZones = [
-    { center: [6.93, 79.86], radius: 5000, type: "flood" }, // Colombo
-    { center: [6.95, 80.79], radius: 4000, type: "landslide" }, // Nuwara Eliya
-    { center: [6.68, 80.4], radius: 4500, type: "flood" }, // Ratnapura
-  ];
-
   const selectedCityData = selectedCity
     ? sriLankanCities.find(
         (city) => city.name.toLowerCase() === selectedCity.toLowerCase()
