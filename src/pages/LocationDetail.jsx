@@ -23,7 +23,6 @@ function LocationDetail() {
     fetchWeather();
   }, [locationName]);
 
-  // Mock location data
   const locationData = {
     colombo: {
       name: 'Colombo',
@@ -56,7 +55,6 @@ function LocationDetail() {
 
   const data = locationData[locationName] || locationData.colombo;
   
-  // Calculate risk based on real weather
   const calculateRiskLevel = () => {
     if (!weather) return 'Medium';
     
@@ -78,11 +76,10 @@ function LocationDetail() {
 
   return (
     <div className="location-detail-container">
-      {/* Header with Real Weather */}
       <div className="location-header">
         <div>
           <h1>
-            📍 {data.name} - Disaster Preparedness
+            <i className='fa-solid fa-location-dot'></i> {data.name} - Disaster Preparedness
             {weather && (
               <span className="weather-badge">
                 <img src={getWeatherIcon(weather.icon)} alt={weather.weather} />
@@ -106,10 +103,9 @@ function LocationDetail() {
         </div>
       </div>
       
-      {/* Weather Statistics */}
       {weather && (
         <div className="weather-stats-detail">
-          <h2>🌤️ Current Weather Conditions</h2>
+          <h2><span className="fas fa-sun"></span>  Current Weather Conditions</h2>
           <div className="weather-metrics">
             <div className="metric">
               <div className="metric-label">Temperature</div>
@@ -139,34 +135,32 @@ function LocationDetail() {
         </div>
       )}
       
-      {/* Location Statistics */}
       <div className="location-stats">
         <div className="stat-card">
-          <div className="stat-icon">👥</div>
+          <div className="stat-icon fas fa-users text-primary"></div>
           <div className="stat-value">{data.population}</div>
           <div className="stat-label">Population</div>
         </div>
         <div className="stat-card">
-          <div className="stat-icon">⚠️</div>
+          <div className="stat-icon fa-solid fa-exclamation-triangle text-warning"></div>
           <div className="stat-value">{data.commonDisasters.length}</div>
           <div className="stat-label">Common Disaster Types</div>
         </div>
         <div className="stat-card">
-          <div className="stat-icon">🏠</div>
+          <div className="stat-icon fas fa-home"></div>
           <div className="stat-value">{data.shelters.length}</div>
           <div className="stat-label">Designated Shelters</div>
         </div>
         <div className="stat-card">
-          <div className="stat-icon">🚨</div>
+          <div className="stat-icon fas fa-bell text-warning"></div>
           <div className="stat-value">{data.lastAlert}</div>
           <div className="stat-label">Last Alert</div>
         </div>
       </div>
       
       <div className="location-sections">
-        {/* Common Disasters */}
         <div className="info-section">
-          <h2>⚠️ Common Disasters in {data.name}</h2>
+          <h2><i className="fa-solid fa-exclamation-triangle text-warning"></i> Common Disasters in {data.name}</h2>
           <ul className="disaster-list">
             {data.commonDisasters.map((disaster, index) => (
               <li key={index} className="disaster-item">
@@ -177,9 +171,8 @@ function LocationDetail() {
           </ul>
         </div>
         
-        {/* Shelters */}
         <div className="info-section">
-          <h2>🏠 Designated Shelters</h2>
+          <h2><i className='fas fa-home'></i> Designated Shelters</h2>
           <div className="shelters-grid">
             {data.shelters.map((shelter, index) => (
               <div key={index} className="shelter-card">
@@ -191,9 +184,8 @@ function LocationDetail() {
           </div>
         </div>
         
-        {/* Preparedness Checklist */}
         <div className="info-section">
-          <h2>📋 Preparedness Checklist</h2>
+          <h2><i className='fas fa-book'></i> Preparedness Checklist</h2>
           <div className="checklist">
             {[
               'Emergency kit ready (water, food, medicine)',
@@ -212,12 +204,11 @@ function LocationDetail() {
           </div>
         </div>
         
-        {/* Emergency Procedures */}
         <div className="info-section">
-          <h2>🚨 Emergency Procedures</h2>
+          <h2><i className='fa-solid fa-location text-danger'></i> Emergency Procedures</h2>
           <div className="procedures">
             <div className="procedure-card">
-              <h3>📞 Immediate Actions</h3>
+              <h3><i className='fas fa-phone text-dark'></i> Immediate Actions</h3>
               <ol>
                 <li>Stay calm and alert</li>
                 <li>Listen to official announcements</li>
@@ -227,7 +218,7 @@ function LocationDetail() {
               </ol>
             </div>
             <div className="procedure-card">
-              <h3>🆘 During Disaster</h3>
+              <h3><i className='fas fa-life-ring text-danger'></i> During Disaster</h3>
               <ol>
                 <li>Do not walk through moving water</li>
                 <li>Avoid electrical equipment</li>

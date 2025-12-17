@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { getWeatherByCity, getMultipleCitiesWeather, getWeatherIcon } from '../services/weatherService';
 import './Home.css';
 import MapComponent from '../components/MapComponent';
@@ -79,7 +79,7 @@ function Home() {
   return (
     <div className="container">
       <div className="top-section row">
-      <div className="hero-section col">
+      <div className="hero-section col  text-light">
         <h1 className="hero-title"><i className='fa-solid fa-bell'></i> Sri Lanka Disaster Alert System</h1>
         <p className="hero-subtitle">
           Real-time alerts and preparedness information for natural disasters in Sri Lanka
@@ -87,7 +87,7 @@ function Home() {
       </div>
 
       <div className='col'>
-        <h2><i class="fa-solid fa-location-dot"></i> Check Weather</h2>
+        <h2 className=' text-light'><i class="fa-solid fa-location-dot"></i> Check Weather</h2>
         <form onSubmit={handleSearch} className="location-input-container form-floating">
           <input
             type="text"
@@ -105,9 +105,9 @@ function Home() {
         </div>
         </div>
         
-        <div className="location-section">
+        <div className="location-section my-5">
         {weatherData && (
-          <div className="current-weather">
+          <div className="current-weather glass">
             <div className="weather-header">
               <h3>
                 <img 
@@ -117,7 +117,7 @@ function Home() {
                 />
                 {weatherData.city}, {weatherData.country}
               </h3>
-              <div className={`weather-severity severity-${weatherData.severity}`}>
+              <div className={`weather-severity risk-${weatherData.severity}`}>
                 {weatherData.severity.toUpperCase()} RISK
               </div>
             </div>
@@ -152,11 +152,11 @@ function Home() {
         )}
       </div>
       
-      <div className="cities-weather-section">
+      <div className="cities-weather-section text-light">
         <h2 className='text-center'><i className="fa-solid fa-globe"></i> Weather Across Sri Lanka</h2>
         <div className="cities-grid">
           {allCitiesWeather.map((city, index) => (
-            <div key={index} className="city-weather-card">
+            <div key={index} className="city-weather-card glass">
               <div className="city-name">{city.city}</div>
               <img 
                 src={getWeatherIcon(city.icon)} 
@@ -178,12 +178,12 @@ function Home() {
       </div>
       
       <div className="alerts-section my-5">
-        <h2 className='text-center'><i class="fa-solid fa-bell"></i> Active Alerts</h2>
+        <h2 className='text-center text-light'><i class="fa-solid fa-bell"></i> Active Alerts</h2>
           <div className="alerts-grid row">
             {mockAlerts.map(alert => (
               <div 
                 key={alert.id} 
-                className={`m-3 p-3 col alert-card severity-${alert.severity}`}
+                className={`m-3 p-3 col alert-card glass text-light severity-${alert.severity}`}
               >
                 <div className="alert-header text-center m-3 fs-5">
                   {alert.icon.startsWith('http') ? (
@@ -208,7 +208,7 @@ function Home() {
       </div>
       
       <div className="contacts-section my-5">
-        <h2 className='text-center'><i class="fa-solid fa-hand"></i> Emergency Contacts</h2>
+        <h2 className='text-center text-light'><i class="fa-solid fa-hand"></i> Emergency Contacts</h2>
         <div className="contacts-grid row my-4">
           {emergencyContacts.map((contact, index) => (
             <div key={index} className="contact-card text-center m-3 p-3 col">
@@ -220,19 +220,19 @@ function Home() {
         </div>
       </div>
       
-      <h2 className='text-center my-4'><i class="fa-solid fa-bolt"></i> Quick Actions</h2>
+      <h2 className='text-center my-4 text-light'><i class="fa-solid fa-bolt"></i> Quick Actions</h2>
       <div className="actions-section d-flex justify-content-center">
         <div className="actions-buttons btn-group">
-          <button className="action-button btn btn-outline-success">
+          <button className="action-button btn btn-outline-light">
           <i class="fa-solid fa-book"></i> View Preparedness Checklist
           </button>
-          <button className="action-button btn btn-success">
+          <button className="action-button btn btn-light">
           <i class="fa-solid fa-map"></i> Find Nearest Shelter
           </button>
-          <button className="action-button btn btn-outline-success">
+          <button className="action-button btn btn-outline-light">
           <i class="fa-solid fa-tower-broadcast"></i> Subscribe to Alerts
           </button>
-          <button className="action-button btn btn-success">
+          <button className="action-button btn btn-light">
           <i class="fa-solid fa-chart-simple"></i> View Historical Data
           </button>
         </div>

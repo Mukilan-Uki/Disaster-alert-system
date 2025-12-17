@@ -4,90 +4,156 @@
   --background-color: white;
 }
 
-.div{
+/* FIXED NAVIGATION WRAPPER */
+.nav-container-wrapper {
+  position: fixed;  /* ✅ Changed from flex to fixed */
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;  /* ✅ Ensure it's above other content */
   display: flex;
   justify-content: center;
+  padding: 15px 0;  /* ✅ Add padding for better spacing */
+  background: transparent;  /* ✅ Make wrapper transparent */
 }
 
 .navbar {
-    background: var(--primary-color);
-    color: var(--secondary-color);
-    padding: 15px 20px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    border-radius: 50px;
-    width: 1200px;
+  color: var(--secondary-color);
+  padding: 15px 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 50px;
+  width: 1200px;
+  max-width: 95%;  /* ✅ Responsive max width */
+}
+
+.glass-nav {
+  background: rgba(255, 255, 255, 0.428);  /* ✅ Increased opacity */
+  border-radius: 20px;
+  backdrop-filter: blur(15px);
+  padding: 15px 25px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* FLEX CONTAINER FOR NAV ITEMS */
+.nav-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+  
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.logo-image{
+  width: 40px;
+}
+
+.logo-text {
+  color: var(--secondary-color);
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 40px;
+}
+
+.nav-link {
+  color: var(--secondary-color);
+  text-decoration: none;
+  padding: 8px 16px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: 0.3s ease;
+}
+
+.nav-link:hover {
+  transform: scale(1.1);
+  background: rgba(0, 0, 0, 0.05);  /* ✅ Add hover background */
+}
+
+.emergency-badge {
+  background: #ff4757;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 25px;
+  font-weight: bold;
+  animation: pulse 2s infinite;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: transform 0.3s;
+}
+
+.emergency-badge:hover{
+  background-color: #ff3742;
+  transform: scale(1.05);
+}
+
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.7; }
+  100% { opacity: 1; }
+}
+
+/* MOBILE RESPONSIVE */
+@media (max-width: 768px) {
+  .nav-container-wrapper {
+    padding: 10px;  /* ✅ Reduced padding on mobile */
   }
   
-  .logo {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 1.5rem;
-    font-weight: bold;
+  .navbar {
+    width: 100%;
+    border-radius: 15px;
+    padding: 10px 15px;
   }
   
-  .logo-image{
-    width: 40px;
-  }
-  
-  .logo-text {
-    color: var(--secondary-color);
-    padding: 5px 10px;
-    border-radius: 5px;
+  .nav-container {
+    flex-direction: column;
+    gap: 15px;
   }
   
   .nav-links {
-    display: flex;
-    gap: 40px;
-  }
-  
-  .nav-link {
-    color: var(--secondary-color);
-    text-decoration: none;
-    padding: 8px 16px;
-    border-radius: 5px;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    transition: 0.3s ease;
-  }
-  
-  .nav-link:hover {
-    transform: scale(1.1);
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
   }
   
   .emergency-badge {
-    background: #ff4757;
+    margin-top: 5px;
     padding: 8px 15px;
-    border-radius: 20px;
-    font-weight: bold;
-    animation: pulse 2s infinite;
-    border: none;
   }
+  
+  .glass-nav {
+    padding: 15px;
+  }
+}
 
-  .emergency-badge:hover{
-    background-color: #ff4757;
-    transform: scale(1.05);
+/* VERY SMALL SCREENS */
+@media (max-width: 480px) {
+  .nav-links {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
   }
   
-  @keyframes pulse {
-    0% { opacity: 1; }
-    50% { opacity: 0.7; }
-    100% { opacity: 1; }
+  .logo-text {
+    font-size: 1.2rem;
   }
   
-  @media (max-width: 768px) {
-    .nav-container {
-      flex-direction: column;
-      gap: 15px;
-    }
-    
-    .nav-links {
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-    
-    .emergency-badge {
-      margin-top: 10px;
-    }
+  .nav-link span {
+    margin-right: 5px;
   }
+}

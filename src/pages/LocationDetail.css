@@ -1,4 +1,3 @@
-/* src/pages/LocationDetail.css */
 .location-detail-container {
     max-width: 1200px;
     margin: 0 auto;
@@ -222,7 +221,6 @@
       grid-template-columns: 1fr;
     }
   }
-/* Loading Screen */
 .loading-screen {
   display: flex;
   flex-direction: column;
@@ -247,7 +245,6 @@
   100% { transform: rotate(360deg); }
 }
 
-/* Weather Badge in Header */
 .weather-badge {
   display: inline-flex;
   align-items: center;
@@ -271,7 +268,6 @@
   font-size: 0.9rem;
 }
 
-/* Risk Badge Enhancement */
 .risk-badge {
   text-align: center;
   min-width: 150px;
@@ -295,7 +291,6 @@
   margin-top: 5px;
 }
 
-/* Weather Metrics */
 .weather-stats-detail {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
@@ -344,7 +339,6 @@
   text-transform: uppercase;
 }
 
-/* Update existing header for better layout */
 .location-header {
   display: flex;
   justify-content: space-between;
@@ -354,7 +348,7 @@
   margin-bottom: 30px;
 }
 
-/* Mobile Responsive */
+
 @media (max-width: 768px) {
   .location-header {
     flex-direction: column;
