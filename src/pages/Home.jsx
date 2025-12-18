@@ -21,18 +21,30 @@ function Home() {
     }
   };
 
-  useEffect(() => {
-    fetchWeather();
-    
-    const interval = setInterval(fetchWeather, 5 * 60 * 1000);
-    
-    return () => clearInterval(interval);
-  }, [fetchWeather]);
-
   const handleSearch = (e) => {
     e.preventDefault();
     fetchWeather();
   };
+
+  useEffect(() => {
+  const fetchWeather = async () => {
+    try {
+      const data = await getWeatherByCity(location);
+      setWeatherData(data);
+      
+      const citiesData = await getMultipleCitiesWeather();
+      setAllCitiesWeather(citiesData);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  fetchWeather();
+  
+  const interval = setInterval(fetchWeather, 5 * 60 * 1000);
+  
+  return () => clearInterval(interval);
+}, [location]);
 
   const mockAlerts = [
     {
