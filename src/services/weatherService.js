@@ -1,4 +1,4 @@
-const API_KEY = process.env.REACT_APP_WEATHER_API_KEY; 
+const API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
 const BASE_URL = 'https://api.openweathermap.org/data/2.5';
 
 const cache = {};
@@ -37,34 +37,44 @@ export const getWeatherByCity = async (cityName = 'Colombo') => {
     if (cache[cacheKey] && (now - cache[cacheKey].timestamp < 10 * 60 * 1000)) {
       return cache[cacheKey].data;
     }
-    
-    const response = await fetch(
-      `${BASE_URL}/weather?q=${cityName}&appid=${API_KEY}&units=metric`
-    );
-    
-    if (!response.ok) {
-      throw new Error(`Weather API error: ${response.status}`);
+    // Prefer backend proxy if available: try relative `/api/weather` first
+    let data;
+    try {
+      const proxyResp = await fetch(`/api/weather?city=${encodeURIComponent(cityName)}`);
+      if (proxyResp.ok) {
+        data = await proxyResp.json();
+      } else {
+        // backend responded but with error, fall back to OpenWeather directly
+        throw new Error('Backend proxy error');
+      }
+    } catch (errProxy) {
+      // Fallback to direct OpenWeather API call (requires REACT_APP_WEATHER_API_KEY)
+      const response = await fetch(
+        `${BASE_URL}/weather?q=${encodeURIComponent(cityName)}&appid=${API_KEY}&units=metric`
+      );
+
+      if (!response.ok) {
+        throw new Error(`Weather API error: ${response.status}`);
+      }
+
+      data = await response.json();
     }
     
-    const data = await response.json();
-    
+    // If server proxy returned a simplified object, normalize it here
     const formattedData = {
-      city: data.name,
-      country: data.sys.country,
-      temperature: Math.round(data.main.temp),
-      feelsLike: Math.round(data.main.feels_like),
-      humidity: data.main.humidity,
-      pressure: data.main.pressure,
-      windSpeed: data.wind.speed,
-      weather: data.weather[0].main,
-      description: data.weather[0].description,
-      icon: data.weather[0].icon,
-      alertType: getAlertTypeFromWeather(data.weather[0].id),
+      city: data.name || data.city,
+      country: (data.sys && data.sys.country) || data.country,
+      temperature: data.main ? Math.round(data.main.temp) : Math.round(data.temperature),
+      feelsLike: data.main ? Math.round(data.main.feels_like) : data.feelsLike,
+      humidity: data.main ? data.main.humidity : data.humidity,
+      pressure: data.main ? data.main.pressure : data.pressure,
+      windSpeed: data.wind ? data.wind.speed : data.windSpeed,
+      weather: data.weather ? data.weather[0].main : data.weather,
+      description: data.weather ? data.weather[0].description : data.description,
+      icon: data.weather ? data.weather[0].icon : data.icon,
+      alertType: data.weather ? getAlertTypeFromWeather(data.weather[0].id) : data.alertType,
       severity: getSeverity(data),
-      coordinates: {
-        lat: data.coord.lat,
-        lon: data.coord.lon
-      },
+      coordinates: data.coord ? { lat: data.coord.lat, lon: data.coord.lon } : data.coordinates,
       timestamp: new Date().toLocaleString('en-US', {
         timeZone: 'Asia/Colombo',
         hour12: true,
