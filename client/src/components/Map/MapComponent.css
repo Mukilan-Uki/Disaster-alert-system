@@ -1,0 +1,38 @@
+.map-wrapper {
+  padding: 12px;
+}
+.map-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.map-container {
+  margin-top: 12px;
+}
+.map-legend {
+  display: flex;
+  gap: 12px;
+}
+.legend-color {
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
+}
+.legend-color.flood {
+  background: #1e90ff;
+}
+.legend-color.landslide {
+  background: #8b4513;
+}
+.legend-color.storm {
+  background: #483d8b;
+}
+.legend-color.low-risk {
+  background: #888;
+}
+.custom-marker-icon {
+  border-radius: 50%;
+}
+.map-popup {
+  max-width: 220px;
+}

@@ -11,5 +11,6 @@ Frontend Structure (src/)
 - `styles/` - Global/shared CSS variables and theme files (optional).
 
 Notes:
+
 - Many component-level CSS files are kept co-located next to their components to keep styles local and easy to maintain.
 - `server/` holds the backend Express app and database configuration; it is a separate Node.js project within this repo.

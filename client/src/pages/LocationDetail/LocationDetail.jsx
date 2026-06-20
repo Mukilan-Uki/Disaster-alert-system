@@ -1,10 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import { getWeatherByCity, getWeatherIcon } from '../../services/weatherService';
-import './LocationDetail.css';
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import {
+  getWeatherByCity,
+  getWeatherIcon,
+} from "../../services/weatherService";
+import "./LocationDetail.css";
 
 function LocationDetail() {
-  const { locationName = 'colombo' } = useParams();
+  const { locationName = "colombo" } = useParams();
   const [weather, setWeather] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -14,7 +17,7 @@ function LocationDetail() {
         const data = await getWeatherByCity(locationName);
         setWeather(data);
       } catch (error) {
-        console.error('Error fetching weather:', error);
+        console.error("Error fetching weather:", error);
       } finally {
         setLoading(false);
       }
@@ -25,42 +28,56 @@ function LocationDetail() {
 
   const locationData = {
     colombo: {
-      name: 'Colombo',
-      population: '5.6 million',
-      commonDisasters: ['Floods', 'Urban flooding', 'Landslides', 'Thunderstorms'],
-      shelters: [
-        { name: 'Colombo Public Library', capacity: '500 people' },
-        { name: 'Town Hall', capacity: '300 people' },
-        { name: 'Sugathadasa Stadium', capacity: '1000 people' }
+      name: "Colombo",
+      population: "5.6 million",
+      commonDisasters: [
+        "Floods",
+        "Urban flooding",
+        "Landslides",
+        "Thunderstorms",
       ],
-      emergencyContacts: ['1990', '011-2674444'],
-      hospitals: ['National Hospital Colombo', 'Lanka Hospitals', 'Nawaloka Hospital'],
-      floodProneAreas: ['Bambalapitiya', 'Wellawatta', 'Kirulapone', 'Kotahena'],
-      lastAlert: 'Flood warning - 2 days ago'
+      shelters: [
+        { name: "Colombo Public Library", capacity: "500 people" },
+        { name: "Town Hall", capacity: "300 people" },
+        { name: "Sugathadasa Stadium", capacity: "1000 people" },
+      ],
+      emergencyContacts: ["1990", "011-2674444"],
+      hospitals: [
+        "National Hospital Colombo",
+        "Lanka Hospitals",
+        "Nawaloka Hospital",
+      ],
+      floodProneAreas: [
+        "Bambalapitiya",
+        "Wellawatta",
+        "Kirulapone",
+        "Kotahena",
+      ],
+      lastAlert: "Flood warning - 2 days ago",
     },
     kandy: {
-      name: 'Kandy',
-      population: '1.5 million',
-      commonDisasters: ['Landslides', 'Flash floods', 'Earth tremors'],
+      name: "Kandy",
+      population: "1.5 million",
+      commonDisasters: ["Landslides", "Flash floods", "Earth tremors"],
       shelters: [
-        { name: 'D.S. Senanayake Hall', capacity: '400 people' },
-        { name: 'Kandy City Center', capacity: '200 people' }
+        { name: "D.S. Senanayake Hall", capacity: "400 people" },
+        { name: "Kandy City Center", capacity: "200 people" },
       ],
-      emergencyContacts: ['1990', '081-2222222'],
-      hospitals: ['Kandy General Hospital', 'Asiri Hospitals Kandy'],
-      floodProneAreas: ['Peradeniya', 'Gampola', 'Gelioya'],
-      lastAlert: 'Landslide alert - 5 days ago'
-    }
+      emergencyContacts: ["1990", "081-2222222"],
+      hospitals: ["Kandy General Hospital", "Asiri Hospitals Kandy"],
+      floodProneAreas: ["Peradeniya", "Gampola", "Gelioya"],
+      lastAlert: "Landslide alert - 5 days ago",
+    },
   };
 
   const data = locationData[locationName] || locationData.colombo;
-  
+
   const calculateRiskLevel = () => {
-    if (!weather) return 'Medium';
-    
-    if (weather.severity === 'high') return 'High';
-    if (weather.severity === 'medium') return 'Medium';
-    return 'Low';
+    if (!weather) return "Medium";
+
+    if (weather.severity === "high") return "High";
+    if (weather.severity === "medium") return "Medium";
+    return "Low";
   };
 
   const riskLevel = calculateRiskLevel();
@@ -78,8 +95,9 @@ function LocationDetail() {
     <div className="location-detail-container">
       <div className="location-header">
         <div>
-          <h1 className=' text-light'>
-            <i className='fa-solid fa-location-dot'></i> {data.name} - Disaster Preparedness
+          <h1 className=" text-light">
+            <i className="fa-solid fa-location-dot"></i> {data.name} - Disaster
+            Preparedness
             {weather && (
               <span className="weather-badge">
                 <img src={getWeatherIcon(weather.icon)} alt={weather.weather} />
@@ -88,10 +106,10 @@ function LocationDetail() {
             )}
           </h1>
           <p className="location-subtitle text-light">
-            Last updated: {weather?.timestamp || 'Just now'}
+            Last updated: {weather?.timestamp || "Just now"}
           </p>
         </div>
-        
+
         <div className={`risk-badge risk-${riskLevel.toLowerCase()}`}>
           <div className="risk-label">Risk Level</div>
           <div className="risk-value">{riskLevel}</div>
@@ -102,10 +120,13 @@ function LocationDetail() {
           )}
         </div>
       </div>
-      
+
       {weather && (
         <div className="weather-stats-detail">
-          <h2><span className="fas fa-sun text-warning"></span>  Current Weather Conditions</h2>
+          <h2>
+            <span className="fas fa-sun text-warning"></span> Current Weather
+            Conditions
+          </h2>
           <div className="weather-metrics">
             <div className="metric">
               <div className="metric-label">Temperature</div>
@@ -129,12 +150,14 @@ function LocationDetail() {
             </div>
             <div className="metric">
               <div className="metric-label">Alert Type</div>
-              <div className="metric-value alert-type-badge">{weather.alertType}</div>
+              <div className="metric-value alert-type-badge">
+                {weather.alertType}
+              </div>
             </div>
           </div>
         </div>
       )}
-      
+
       <div className="location-stats">
         <div className="stat-card">
           <div className="stat-icon fas fa-users text-primary"></div>
@@ -157,10 +180,13 @@ function LocationDetail() {
           <div className="stat-label">Last Alert</div>
         </div>
       </div>
-      
+
       <div className="location-sections">
         <div className="info-section">
-          <h2><i className="fa-solid fa-exclamation-triangle text-warning"></i> Common Disasters in {data.name}</h2>
+          <h2>
+            <i className="fa-solid fa-exclamation-triangle text-warning"></i>{" "}
+            Common Disasters in {data.name}
+          </h2>
           <ul className="disaster-list">
             {data.commonDisasters.map((disaster, index) => (
               <li key={index} className="disaster-item">
@@ -170,9 +196,11 @@ function LocationDetail() {
             ))}
           </ul>
         </div>
-        
+
         <div className="info-section">
-          <h2><i className='fas fa-home'></i> Designated Shelters</h2>
+          <h2>
+            <i className="fas fa-home"></i> Designated Shelters
+          </h2>
           <div className="shelters-grid">
             {data.shelters.map((shelter, index) => (
               <div key={index} className="shelter-card">
@@ -183,18 +211,20 @@ function LocationDetail() {
             ))}
           </div>
         </div>
-        
+
         <div className="info-section">
-          <h2><i className='fas fa-book'></i> Preparedness Checklist</h2>
+          <h2>
+            <i className="fas fa-book"></i> Preparedness Checklist
+          </h2>
           <div className="checklist">
             {[
-              'Emergency kit ready (water, food, medicine)',
-              'Important documents in waterproof bag',
-              'Family meeting point established',
-              'Emergency contacts saved offline',
-              'Battery pack fully charged',
-              'Know evacuation routes',
-              'Monitor weather updates regularly'
+              "Emergency kit ready (water, food, medicine)",
+              "Important documents in waterproof bag",
+              "Family meeting point established",
+              "Emergency contacts saved offline",
+              "Battery pack fully charged",
+              "Know evacuation routes",
+              "Monitor weather updates regularly",
             ].map((item, index) => (
               <div key={index} className="checklist-item">
                 <input type="checkbox" id={`check-${index}`} />
@@ -203,12 +233,17 @@ function LocationDetail() {
             ))}
           </div>
         </div>
-        
+
         <div className="info-section">
-          <h2><i className='fa-solid fa-location text-danger'></i> Emergency Procedures</h2>
+          <h2>
+            <i className="fa-solid fa-location text-danger"></i> Emergency
+            Procedures
+          </h2>
           <div className="procedures">
             <div className="procedure-card">
-              <h3><i className='fas fa-phone text-dark'></i> Immediate Actions</h3>
+              <h3>
+                <i className="fas fa-phone text-dark"></i> Immediate Actions
+              </h3>
               <ol>
                 <li>Stay calm and alert</li>
                 <li>Listen to official announcements</li>
@@ -218,7 +253,9 @@ function LocationDetail() {
               </ol>
             </div>
             <div className="procedure-card">
-              <h3><i className='fas fa-life-ring text-danger'></i> During Disaster</h3>
+              <h3>
+                <i className="fas fa-life-ring text-danger"></i> During Disaster
+              </h3>
               <ol>
                 <li>Do not walk through moving water</li>
                 <li>Avoid electrical equipment</li>

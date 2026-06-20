@@ -8,7 +8,7 @@ Setup
 
 ```
 OPENWEATHER_API_KEY=your_api_key_here
-DATABASE_URL=postgres://user:pass@localhost:5432/disaster_db
+MONGODB_URI=mongodb+srv://<username>:<password>@<cluster>.mongodb.net/disaster_alert?retryWrites=true&w=majority
 PORT=5000
 ```
 

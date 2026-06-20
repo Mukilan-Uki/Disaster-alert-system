@@ -29,8 +29,22 @@ git clone https://github.com/Mukilan-Uki/Disaster-alert-system.git
 # 2. Navigate to project
 cd Disaster-alert-system
 
-# 3. Install dependencies
-npm install
+# 3. Install dependencies (frontend and backend are separate)
+cd client && npm install
+cd ../server && npm install
 
-# 4. Start development server
-npm start
+# 4. Start both dev servers from the project root
+cd ..
+npm run dev
+```
+
+This starts the React app at `http://localhost:3000` and the Express API at `http://localhost:5000`.
+
+To run only the frontend or backend:
+
+```bash
+# Frontend only
+cd client && npm start
+
+# Backend only
+cd server && npm start

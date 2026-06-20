@@ -1,0 +1,19 @@
+.hero-title {
+  font-size: 28px;
+}
+.container {
+  padding: 18px;
+}
+.cities-grid {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.city-weather-card {
+  width: 180px;
+}
+.glass {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 12px;
+  border-radius: 8px;
+}

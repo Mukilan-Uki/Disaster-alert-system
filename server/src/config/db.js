@@ -1,10 +1,13 @@
-const { Pool } = require('pg');
+const mongoose = require("mongoose");
 
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-});
+const connectDB = async () => {
+  const uri = process.env.MONGODB_URI;
+  if (!uri) {
+    throw new Error("MONGODB_URI is not set");
+  }
 
-module.exports = {
-  query: (text, params) => pool.query(text, params),
-  pool,
+  await mongoose.connect(uri);
+  console.log("MongoDB connected");
 };
+
+module.exports = connectDB;

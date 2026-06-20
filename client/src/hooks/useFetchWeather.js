@@ -1,6 +1,6 @@
 // Custom hook to fetch weather using services/weatherService.js
-import { useState, useEffect } from 'react';
-import { getWeatherByCity } from '../services/weatherService';
+import { useState, useEffect } from "react";
+import { getWeatherByCity } from "../services/weatherService";
 
 export default function useFetchWeather(city) {
   const [data, setData] = useState(null);
@@ -24,7 +24,9 @@ export default function useFetchWeather(city) {
 
     fetch();
 
-    return () => { mounted = false; };
+    return () => {
+      mounted = false;
+    };
   }, [city]);
 
   return { data, loading, error };

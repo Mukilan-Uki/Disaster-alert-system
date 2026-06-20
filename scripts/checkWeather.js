@@ -1,4 +1,4 @@
-const url = process.argv[2] || 'http://localhost:5000/api/weather?city=Colombo';
+const url = process.argv[2] || "http://localhost:5000/api/weather?city=Colombo";
 
 (async () => {
   try {
@@ -6,7 +6,7 @@ const url = process.argv[2] || 'http://localhost:5000/api/weather?city=Colombo';
     const text = await res.text();
     console.log(text);
   } catch (err) {
-    console.error('Fetch error:', err.message || err);
+    console.error("Fetch error:", err.message || err);
     process.exitCode = 1;
   }
 })();
