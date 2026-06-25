@@ -1,4 +1,4 @@
-export const siTranslations = {
+const siTranslations = {
   nav: {
     dashboard: "උපකරණ පුවරුව",
     alerts: "ඇඟවීම්",
@@ -158,3 +158,5 @@ export const siTranslations = {
     language: "English",
   },
 };
+
+export default siTranslations;

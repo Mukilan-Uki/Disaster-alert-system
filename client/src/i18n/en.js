@@ -1,4 +1,4 @@
-export const enTranslations = {
+const enTranslations = {
   nav: {
     dashboard: "Dashboard",
     alerts: "Alerts",
@@ -161,3 +161,5 @@ export const enTranslations = {
     language: "සිංහල",
   },
 };
+
+export default enTranslations;
