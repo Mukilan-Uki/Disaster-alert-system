@@ -1,4 +1,4 @@
-export default {
+const siTranslations = {
   nav: {
     dashboard: "උපකරණ පුවරුව",
     alerts: "ඇඟවීම්",

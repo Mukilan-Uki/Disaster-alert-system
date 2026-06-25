@@ -1,4 +1,4 @@
-export default {
+const enTranslations = {
   nav: {
     dashboard: "Dashboard",
     alerts: "Alerts",
