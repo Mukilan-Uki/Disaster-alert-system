@@ -14,6 +14,25 @@ mongodb+srv://<username>:<password>@<cluster>.mongodb.net/disaster_alert?retryWr
 
 ## Collections
 
+### 0. `users` Collection
+
+Stores registered users with location and alert preferences.
+
+**Mongoose model:** `server/src/models/User.js`
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `name` | String | Full name |
+| `email` | String | Unique login email |
+| `passwordHash` | String | Bcrypt hashed password |
+| `phone` | String | Optional phone for SMS |
+| `alertPreferences` | Object | Per-disaster toggles (flood, cyclone, etc.) |
+| `notificationChannels` | Object | webPush, email, sms toggles |
+| `lastKnownLocation` | Object | lat, lng, city, district, updatedAt |
+| `isActive` | Boolean | Account status |
+
+---
+
 ### 1. `cities` Collection
 
 Stores disaster-risk metadata for Sri Lankan cities.
@@ -47,35 +66,43 @@ Stores disaster-risk metadata for Sri Lankan cities.
 
 ### 2. `alert` Collection
 
-Stores active disaster alerts affecting one or more cities.
+Stores disaster alerts sent to users (created by the risk monitor).
 
 **Mongoose model:** `server/src/models/Alert.js`
 
-| Field | Type | Required | Description |
-|-------|------|----------|-------------|
-| `_id` | String | yes | Custom document id (e.g. `alert_001`) |
-| `type` | String | yes | Alert type (e.g. `flood`, `cyclone`) |
-| `title` | String | yes | Short alert headline |
-| `affectedCities` | String[] | no | City names impacted by this alert |
-| `severity` | String | no | Alert severity level |
+| Field | Type | Description |
+|-------|------|-------------|
+| `type` | String | flood, cyclone, heavyRain, heat, landslide |
+| `title`, `message` | String | Alert headline and body |
+| `severity` | String | safe, warning, danger |
+| `affectedUsers` | ObjectId[] | Users who received this alert |
+| `affectedCities` | String[] | City names |
+| `weatherSnapshot` | Object | Weather at time of alert |
+| `status` | String | active, expired, cancelled |
+| `readBy` | Array | Read tracking per user |
+| `expiresAt` | Date | Auto-expire time |
 
-**Example document:**
+### 3. `notifications` Collection
 
-```javascript
-{
-  _id: "alert_001",
-  type: "flood",
-  title: "Flood Warning - Colombo",
-  affectedCities: ["Colombo"],
-  severity: "high"
-}
-```
+**Mongoose model:** `server/src/models/Notification.js`
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `userId` | ObjectId | Recipient |
+| `alertId` | ObjectId | Linked alert |
+| `alertType` | String | Used for 2-hour deduplication |
+| `channel` | String | web_push, in_app, email, sms |
+| `title`, `body` | String | Notification content |
+| `sentAt`, `readAt` | Date | Delivery timestamps |
 
 ---
 
 ## API usage
 
-- `GET /api/weather?city=Colombo` fetches live weather from OpenWeatherMap and, when a matching `cities` document exists, merges `riskType`, `severity`, and `population` into the response.
+- `GET /api/weather/risk` — live weather + risk level
+- `GET /api/alerts` — active alerts for logged-in user
+- `POST /api/admin/monitor/run` — manually trigger weather monitor (demo)
+- `POST /api/notifications/subscribe` — save Web Push subscription
 
 ---
 

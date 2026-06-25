@@ -1,0 +1,56 @@
+.weather-card {
+  padding: 24px;
+  color: var(--text-light);
+}
+
+.weather-card__header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.weather-card__icon {
+  width: 72px;
+  height: 72px;
+}
+
+.weather-card__city {
+  font-size: 1.25rem;
+  margin: 0;
+}
+
+.weather-card__desc {
+  text-transform: capitalize;
+  color: var(--text-muted);
+  margin: 4px 0 0;
+}
+
+.weather-card__temp {
+  font-size: 3rem;
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: 20px;
+}
+
+.weather-card__stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.weather-card__stats .stat-label {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.weather-card__stats .stat-value {
+  font-weight: 600;
+}
+
+@media (min-width: 768px) {
+  .weather-card__stats {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}

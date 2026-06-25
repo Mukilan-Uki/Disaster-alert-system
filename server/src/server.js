@@ -1,10 +1,12 @@
 const app = require("./app");
 const connectDB = require("./config/db");
+const { startWeatherMonitorJob } = require("./jobs/weatherMonitor");
 
 const port = process.env.PORT || 5000;
 
 connectDB()
   .then(() => {
+    startWeatherMonitorJob();
     app.listen(port, () => {
       console.log(`Server listening on port ${port}`);
     });

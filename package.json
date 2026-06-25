@@ -1,14 +1,52 @@
 {
   "name": "disaster-alert-system",
   "version": "0.1.0",
+  "homepage": "https://mukilan-uki.github.io/Disaster-alert-system",
   "private": true,
+  "dependencies": {
+    "axios": "^1.13.2",
+    "bootstrap": "^5.3.8",
+    "leaflet": "^1.9.4",
+    "react": "^19.2.1",
+    "react-dom": "^19.2.1",
+    "react-leaflet": "^5.0.0",
+    "react-router-dom": "^7.10.1",
+    "react-scripts": "5.0.1"
+  },
   "scripts": {
-    "client": "cd client && npm start",
-    "server": "cd server && npm start",
+    "start": "npm run dev",
+    "build": "cd client && npm run build",
+    "test": "cd client && npm run test",
+    "eject": "cd client && npm run eject",
+    "predeploy": "npm run build",
+    "deploy": "cd client && npm run deploy",
+    "client": "npm --prefix client start",
+    "server": "npm --prefix server start",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "smoke-server": "node scripts/smokeTestServer.js"
   },
+  "proxy": "http://localhost:5000",
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
   "devDependencies": {
+    "@types/leaflet": "^1.9.21",
+    "gh-pages": "^6.3.0",
     "concurrently": "^8.2.0"
   }
 }

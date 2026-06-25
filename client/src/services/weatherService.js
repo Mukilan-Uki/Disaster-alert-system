@@ -29,6 +29,52 @@ const getSeverity = (weatherData) => {
   return "low";
 };
 
+export const getWeatherRisk = async ({ city, lat, lng } = {}) => {
+  try {
+    const token = localStorage.getItem("token");
+    const headers = token ? { Authorization: `Bearer ${token}` } : {};
+
+    let url;
+    if (lat != null && lng != null) {
+      url = `/api/weather/risk?lat=${lat}&lng=${lng}`;
+    } else {
+      url = `/api/weather/risk?city=${encodeURIComponent(city || "Colombo")}`;
+    }
+
+    const response = await fetch(url, { headers });
+    if (!response.ok) throw new Error("Risk API error");
+
+    const data = await response.json();
+    return {
+      city: data.city,
+      country: data.country,
+      temperature: data.temperature,
+      feelsLike: data.feelsLike,
+      humidity: data.humidity,
+      pressure: data.pressure,
+      windSpeed: data.windSpeed,
+      rainfall1h: data.rainfall1h,
+      rainfall3h: data.rainfall3h,
+      weather: data.weather,
+      description: data.description,
+      icon: data.icon,
+      coordinates: data.coordinates,
+      riskLevel: data.riskLevel || "safe",
+      risks: data.risks || [],
+      riskType: data.riskType,
+      population: data.population,
+    };
+  } catch (error) {
+    console.error("Error fetching weather risk:", error);
+    const mock = getMockWeatherData(city || "Colombo");
+    return {
+      ...mock,
+      riskLevel: mock.severity === "high" ? "danger" : mock.severity === "medium" ? "warning" : "safe",
+      risks: [],
+    };
+  }
+};
+
 export const getWeatherByCity = async (cityName = "Colombo") => {
   try {
     const cacheKey = cityName.toLowerCase();

@@ -10,10 +10,14 @@ A **React-based disaster management application** providing real-time weather al
 - ** Emergency Info**: Important contact numbers
 
 ## Tech Stack
-- **Frontend**: React.js
+- **Frontend**: React.js, Tailwind CSS, Framer Motion, Lucide Icons
+- **Backend**: Node.js, Express, MongoDB/Mongoose (unchanged)
 - **APIs**: OpenWeatherMap + Leaflet Maps
-- **Styling**: CSS3 with media queries
 - **Routing**: React Router DOM
+- **Branding**: centralized in `client/src/config/appConfig.js`, driven by env vars — see `docs/ENVIRONMENT_VARIABLES.md`
+
+> UI redesign notes: see `docs/DEPLOYMENT_GUIDE.md` for the new build requirements
+> (Tailwind/PostCSS) and `docs/PRODUCTION_CHECKLIST.md` for what's covered vs. still open.
 
 ## Getting Started
 

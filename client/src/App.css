@@ -51,6 +51,24 @@ body {
   font-weight: bold;
 }
 
+.about-page {
+  max-width: 640px;
+  margin: 40px auto;
+  padding: 32px;
+  color: var(--text-light);
+  text-align: center;
+}
+
+.about-page h1 {
+  margin-bottom: 16px;
+}
+
+.about-page p {
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin-bottom: 12px;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
