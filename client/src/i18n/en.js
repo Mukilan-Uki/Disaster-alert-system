@@ -1,4 +1,4 @@
-const enTranslations = {
+export const enTranslations = {
   nav: {
     dashboard: "Dashboard",
     alerts: "Alerts",
@@ -19,9 +19,11 @@ const enTranslations = {
     getStarted: "Get Started Free",
     login: "Login",
     feature1Title: "Real-time Weather",
-    feature1Desc: "Live conditions for your exact location using GPS and OpenWeather.",
+    feature1Desc:
+      "Live conditions for your exact location using GPS and OpenWeather.",
     feature2Title: "Location-Based Alerts",
-    feature2Desc: "Personalized flood, cyclone, and rain warnings where you are.",
+    feature2Desc:
+      "Personalized flood, cyclone, and rain warnings where you are.",
     feature3Title: "Instant Notifications",
     feature3Desc: "Clear Safe / Warning / Danger levels anyone can understand.",
     howTitle: "How it works",
@@ -35,7 +37,8 @@ const enTranslations = {
   dashboard: {
     greeting: "Hello",
     title: "Disaster Alert Dashboard",
-    subtitle: "Real-time weather and personalized risk assessment for Sri Lanka",
+    subtitle:
+      "Real-time weather and personalized risk assessment for Sri Lanka",
     yourLocation: "Your location",
     locationNotSet: "Location not set",
     update: "Update",
