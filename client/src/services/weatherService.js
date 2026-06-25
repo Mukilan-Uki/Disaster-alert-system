@@ -1,4 +1,7 @@
-const API_BASE_URL = (process.env.REACT_APP_API_BASE_URL || "").replace(/\/+$/, "");
+const API_BASE_URL = (process.env.REACT_APP_API_BASE_URL || "").replace(
+  /\/+$/,
+  "",
+);
 const API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
 const BASE_URL = "https://api.openweathermap.org/data/2.5";
 const BACKEND_API = API_BASE_URL ? `${API_BASE_URL}/api` : "";
@@ -36,11 +39,14 @@ export const getWeatherRisk = async ({ city, lat, lng } = {}) => {
     const token = localStorage.getItem("token");
     const headers = token ? { Authorization: `Bearer ${token}` } : {};
 
-    const relativePath = lat != null && lng != null
-      ? `/weather/risk?lat=${lat}&lng=${lng}`
-      : `/weather/risk?city=${encodeURIComponent(city || "Colombo")}`;
+    const relativePath =
+      lat != null && lng != null
+        ? `/weather/risk?lat=${lat}&lng=${lng}`
+        : `/weather/risk?city=${encodeURIComponent(city || "Colombo")}`;
 
-    const url = BACKEND_API ? `${BACKEND_API}${relativePath}` : `/api${relativePath}`;
+    const url = BACKEND_API
+      ? `${BACKEND_API}${relativePath}`
+      : `/api${relativePath}`;
     const response = await fetch(url, { headers });
     if (!response.ok) throw new Error("Risk API error");
 
@@ -69,7 +75,12 @@ export const getWeatherRisk = async ({ city, lat, lng } = {}) => {
     const mock = getMockWeatherData(city || "Colombo");
     return {
       ...mock,
-      riskLevel: mock.severity === "high" ? "danger" : mock.severity === "medium" ? "warning" : "safe",
+      riskLevel:
+        mock.severity === "high"
+          ? "danger"
+          : mock.severity === "medium"
+            ? "warning"
+            : "safe",
       risks: [],
     };
   }
